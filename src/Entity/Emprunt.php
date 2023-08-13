@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmpruntRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,13 +25,20 @@ class Emprunt
     private ?Exemplaire $exemplaire = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_emprunt = null;
+    private ?DateTimeInterface $date_emprunt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $date_retour = null;
+    private ?DateTimeInterface $date_retour = null;
 
     #[ORM\Column]
     private ?bool $statut = null;
+
+    private ?DateTimeInterface $date_previsionnelle = null;
+
+    public function __construct()
+    {
+        //$this->setDate_previsionnelle();
+    }
 
     public function getId(): ?int
     {
@@ -60,24 +69,24 @@ class Emprunt
         return $this;
     }
 
-    public function getDateEmprunt(): ?\DateTimeInterface
+    public function getDateEmprunt(): ?DateTimeInterface
     {
         return $this->date_emprunt;
     }
 
-    public function setDateEmprunt(\DateTimeInterface $date_emprunt): static
+    public function setDateEmprunt(DateTimeInterface $date_emprunt): static
     {
         $this->date_emprunt = $date_emprunt;
 
         return $this;
     }
 
-    public function getDateRetour(): ?\DateTimeInterface
+    public function getDateRetour(): ?DateTimeInterface
     {
         return $this->date_retour;
     }
 
-    public function setDateRetour(?\DateTimeInterface $date_retour): static
+    public function setDateRetour(?DateTimeInterface $date_retour): static
     {
         $this->date_retour = $date_retour;
 
@@ -92,6 +101,23 @@ class Emprunt
     public function setStatut(bool $statut): static
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getDate_previsionnelle(): ?DateTimeInterface
+    {
+        return $this->date_previsionnelle;
+    }
+
+    /**
+     * Set the value of date_previsionnelle
+     */ 
+    public function setDate_previsionnelle(): self
+    {
+        $date_previsionnelle = DateTime::createFromInterface($this->getDateEmprunt());
+        $date_previsionnelle->modify('+20 days');
+        $this->date_previsionnelle = $date_previsionnelle;
 
         return $this;
     }

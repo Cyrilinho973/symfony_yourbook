@@ -48,6 +48,11 @@ class Livre
         $this->exemplaires = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getTitre(). '-' .$this->getEditeur();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
