@@ -45,8 +45,9 @@ class AdminCrudController extends AbstractCrudController
 
         $roles = ['ROLE_ADMIN', 'ROLE_USER'];
         $fields[] = ChoiceField::new('roles')
-                        ->setChoices(array_combine($role, $role))
-                        ->allowMultipleChoices();
+                        ->setChoices(array_combine($roles, $roles))
+                        ->allowMultipleChoices()
+                        ->renderAsBadges();
 
         return $fields;
     }
