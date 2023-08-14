@@ -20,6 +20,6 @@ class EmpruntCrudController extends AbstractCrudController
         yield AssociationField::new('exemplaire');
         yield AssociationField::new('adherent');
         yield from parent::configureFields($pageName);
-        //yield DateTimeField::new('date_previsionnelle');
+        yield DateTimeField::new('datePrevisionnelle')->setDisabled(true);
     }  
 }
