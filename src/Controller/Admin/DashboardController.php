@@ -10,6 +10,7 @@ use App\Entity\Auteur;
 use App\Entity\Editeur;
 use App\Entity\Emprunt;
 use App\Entity\Adherent;
+use App\Entity\Admin;
 use App\Entity\Exemplaire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,5 +62,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Exemplaire', 'fa-solid fa-book-bookmark', Exemplaire::class);
         yield MenuItem::linkToCrud('Usure', 'fa-solid fa-battery-three-quarters', Usure::class);
         yield MenuItem::linkToCrud('Stock', 'fa-solid fa-layer-group', Stock::class);
+        yield MenuItem::linkToCrud('Admin', 'fa-solid fa-users', Admin::class);
     }
 }

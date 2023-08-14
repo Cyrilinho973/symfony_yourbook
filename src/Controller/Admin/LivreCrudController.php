@@ -6,6 +6,7 @@ use App\Entity\Livre;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -25,7 +26,8 @@ class LivreCrudController extends AbstractCrudController
         yield TextField::new('isbn');
         yield TextField::new('description');
         yield BooleanField::new('archive');
-        yield TextareaField::new('imageFile')->setFormType(VichImageType::class);
+        yield TextareaField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms();
+        yield ImageField::new('imageName', 'Photo')->onlyOnIndex()->setBasePath('/images/livres');
         yield AssociationField::new('auteur');
         yield AssociationField::new('editeur');
         yield AssociationField::new('genres');
